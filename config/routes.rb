@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/destroy'
+  get 'signup', to: 'users#new'
+  post 'signup', to: 'users#create'
+
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
 
   get 'about', to: 'about#index', as: 'about'
   root to: 'products#index'
@@ -19,6 +28,10 @@ Rails.application.routes.draw do
     resources :products
     resources :categories, only: [:index, :new, :create]
   end
+
+  resources :users, only: [:new, :create]
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
